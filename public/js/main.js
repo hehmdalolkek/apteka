@@ -6,12 +6,15 @@ let initApp = function(DATA) {
 		const
 			manufacturer = filters.querySelector('#manufacturer').value,
 			priceMin = document.querySelector('#price-min').value,
-			priceMax = document.querySelector('#price-max').value;
+			priceMax = document.querySelector('#price-max').value,
+			search = document.querySelector('#search').value;
+
 	
 		outputGoods(DATA.filter(item => (
 			(!manufacturer || item.manufacturer === manufacturer) &&
 			(!priceMin || priceMin <= +item.price) &&
-			(!priceMax || priceMax >= +item.price)
+			(!priceMax || priceMax >= +item.price) &&
+			(!search || item.name.toLowerCase().includes(search.toLowerCase()))
 		)));
 	}
 	
