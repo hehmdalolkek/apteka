@@ -26,8 +26,8 @@ app.get('/catalog', db.catalog);
 app.get('/medicines', db.medicines);
 app.get('/supplements', db.supplements);
 app.get('/disinfection', db.disinfection);
-// app.use(handlers.notFound);
-// app.use(handlers.serverError);
+app.use(handlers.notFound);
+app.use(handlers.serverError);
 
 if (require.main === module) {
 	app.listen(port, () => {
