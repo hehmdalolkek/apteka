@@ -23,9 +23,6 @@ app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
 app.get('/', handlers.index);
 app.get('/catalog', db.catalog);
-app.get('/medicines', db.medicines);
-app.get('/supplements', db.supplements);
-app.get('/disinfection', db.disinfection);
 app.use(handlers.notFound);
 app.use(handlers.serverError);
 
