@@ -2,14 +2,15 @@
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
     "mysql2": "^3.6.1"
   },
   "name": "apteka",
   "version": "1.0.0",
   "main": "app.js",
-	"engines": {
-		"node": "18.x"
-	},
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node app.js"
   },

@@ -1,11 +1,19 @@
 const port = process.env.PORT || 3000;
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
-const urlencodedParser = express.urlencoded({extended: false});
+const session = require('express-session');
 const handlers = require('./lib/handlers');
 const db = require('./lib/db');
 
 const app = express();
+app.use(
+	session({
+		secret: 'key',
+		resave: false,
+		saveUninitialized: false
+	})
+);
+app.use(express.urlencoded({extended: true}));
 app.engine('handlebars', expressHandlebars.engine({
 	defaultLayout: 'main',
 	helpers: {
@@ -23,11 +31,12 @@ app.disable('x-powered-by');
 
 app.use(express.static(__dirname + '/public'));
 app.get('/', handlers.index);
+app.post('/', handlers.indexPost);
 app.get('/catalog', db.catalog);
 app.get('/create', db.create);
-app.post('/create', urlencodedParser, db.createPost);
+app.post('/create', db.createPost);
 app.get('/edit/:id', db.edit);
-app.post('/edit/:id', urlencodedParser, db.editPost);
+app.post('/edit/:id', db.editPost);
 app.post('/delete/:id', db.delete);
 app.use(handlers.notFound);
 app.use(handlers.serverError);
