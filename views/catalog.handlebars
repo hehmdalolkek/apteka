@@ -2,7 +2,7 @@
 
 <div id="filters" class="row mb-4">
 
-	<div class="col-sm-4 offset-sm-1"><h4>Поиск</h4>
+	<div class="col-sm-4"><h4>Поиск</h4>
 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="Введите название товара" id="search">
 		</div>
@@ -22,6 +22,10 @@
 			<option value="{{this}}">{{this}}</option>
 		{{/each}}
 		</select>     
+	</div>
+
+	<div class="col-sm-2 align-self-end">
+		<a class="btn btn-primary btn-lg d-block" href="/create">Добавить товар</a>
 	</div>
 </div>
 

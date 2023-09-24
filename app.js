@@ -24,6 +24,8 @@ app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
 app.get('/', handlers.index);
 app.get('/catalog', db.catalog);
+app.get('/create', db.create);
+app.post('/create', urlencodedParser, db.createPost);
 app.get('/edit/:id', db.edit);
 app.post('/edit/:id', urlencodedParser, db.editPost);
 app.post('/delete/:id', db.delete);
