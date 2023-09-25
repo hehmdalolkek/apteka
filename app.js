@@ -1,11 +1,12 @@
-const port = process.env.PORT || 3000;
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
 const handlers = require('./lib/handlers');
 const db = require('./lib/db');
 
+
+
+const port = process.env.PORT || 3000;
 const app = express();
 app.engine('handlebars', expressHandlebars.engine({
 	defaultLayout: 'main',
@@ -21,28 +22,14 @@ app.engine('handlebars', expressHandlebars.engine({
 }));
 app.set('view engine', 'handlebars');
 app.disable('x-powered-by');
-
 app.use(express.urlencoded({extended: true}));
 
 
-const optionsDB = {
-	connectionLimit: 5,
-	// host: 'bf8pdofghs5dakuq9dwl-mysql.services.clever-cloud.com',
-	// user: 'uu5f0avbqckl327q',
-	// database: 'bf8pdofghs5dakuq9dwl',
-	// password: '6J1880YEeUxzpytKh5A9'
-	host: process.env.DB_HOST,
-	user: process.env.DB_USERNAME,
-	database: process.env.DB_DBNAME,
-	password: process.env.DB_PASSWORD
-};
-
-const sessionStore = new MySQLStore(optionsDB);
 
 app.use(session({
 	key: 'session_cookie_name',
 	secret: 'session_cookie_secret',
-	store: sessionStore,
+	store: db.sessionStore,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -54,6 +41,7 @@ const isAuth = (req, res, next) => {
 		return res.redirect('/');
 	}
 };
+
 
 
 app.use(express.static(__dirname + '/public'));
@@ -73,6 +61,8 @@ app.post('/logout', (req, res) => {
 });
 app.use(handlers.notFound);
 app.use(handlers.serverError);
+
+
 
 if (require.main === module) {
 	app.listen(port, () => {
