@@ -21,7 +21,7 @@ let initApp = function(DATA) {
 	function outputGoods(goods) {
 		document.getElementById('goods').innerHTML = goods.map(item => `
 			<tr>
-				<td><img style="max-width: 150px; max-height: 150px" src="${item.image}" alt="фото не загрузилось(("></td>
+				<td class="align-middle"><img style="max-width: 150px; max-height: 150px" src="${item.image}" alt="фото не загрузилось(("></td>
 				<td class="fw-bold align-middle" style="width: 200px">${item.name}</td>
 				<td class="align-middle text-start" style="width: 450px;">${item.description}</td>
 				<td class="align-middle" style="width: 100px;">${item.manufacturer}</td>
